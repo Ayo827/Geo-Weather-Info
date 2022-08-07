@@ -22,7 +22,7 @@ export default function Home() {
               <div className='content'>
               <h2>Welcome to Weather Info</h2>
               <p>Find the current weather condition of any place on planet earth, by searching the name of the place.</p>
-              <p>Create an account today. <Link to="/signup">Sign up</Link> and discover more <Link to="/weatherinfo">weather information</Link></p>
+              <p>Create an account today. <a href="http://geo-weatherinfo.herokuapp.com/signup">Sign up</a> and discover more <Link to="/weatherinfo">weather information</Link></p>
               </div>
             </div> 
           </div>

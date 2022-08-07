@@ -17,7 +17,8 @@ export default function Signup() {
     const [confirmPassword, setConfirmPassword] = useState(" ");
     const [message, setMessage] = useState("");
     const [countries, setCountries] = useState([])
-    const[ country, setCountry] = useState("")
+    const[ country, setCountry] = useState("");
+    const [processing, setProcessing] = useState(false)
     const navigate = useNavigate();
     const userID = window.localStorage.getItem("userID");
 
@@ -29,7 +30,7 @@ export default function Signup() {
         axios({
             method: "get",
             headers: { "Content-Type": "application/json" },
-            url:    `http://api.countrylayer.com/v2/all?access_key=${process.env.REACT_APP_country}`,
+            url: "http://api.countrylayer.com/v2/all?access_key=caf344a07f5d21404a781b8982bcc9eb",
             timeout: 0
         }).then(res => {
             setCountries(res.data);
@@ -40,6 +41,7 @@ export default function Signup() {
     const handlesignup = e => {
         const hashedPassword = bcrypt.hashSync(password.trim(), salt, '$2a$10$CwTycUXWue0Thq9StjUM0u')
         e.preventDefault();
+        setProcessing(true)
             instance({
                 method: 'post',
                 headers: { "Content-Type": "application/json" },
@@ -47,16 +49,19 @@ export default function Signup() {
                 url: '/signup'
             }).then(result=>{
                 if(parseInt(result.data.result) === 0){
+                    setProcessing(false);
                     setMessage(result.data.message);
                 }else if(parseInt(result.data.result) === 1){
+                    setProcessing(false);
                     setMessage(result.data.message);
-                    window.localStorage.setItem("userID", result.data.userID);
-                    window.localStorage.setItem("country", result.data.country)
-                    navigate("/");
+            
+                    window.location.replace("https://geo-weatherinfo.herokuapp.com/login")
                 }else{
+                    setProcessing(false);
                     setMessage(result.data.message);
                 }
             }).catch(err => {
+                setProcessing(false);
                 setMessage("An Error Occured. Please Try Again.");
             })
     }
@@ -77,9 +82,9 @@ export default function Signup() {
                 </select>
                 <input type="password" placeholder="Enter Your Password" onChange={e => setPassword(e.target.value)} required />
                 <input type="password" placeholder="Confirm Password" onChange={e => setConfirmPassword(e.target.value)} required />
-                {(password !== confirmPassword)? <span style={{color: "red"}}>Your Password is not the same</span>:  <button style={(password !== confirmPassword)? {cursor: 'not-allowed', opacity:0.3}: {cursor: 'pointer', opacity: 1}}>Create Account</button>}
+                {(password !== confirmPassword)? <span style={{color: "red"}}>Your Password is not the same</span>:  <button style={(password !== confirmPassword)? {cursor: 'not-allowed', opacity:0.3}: {cursor: 'pointer', opacity: 1}} className={(processing === true)? 'disabled': 'active'}>{(processing === true)?'Creating Your Account' : 'Create Account'}</button>}
                
-                <p>Already have an account?<Link to='/login'>Click to Login</Link></p>
+                <p>Already have an account?<a href='https://geo-weatherinfo.herokuapp.com/login'>Click to Login</a></p>
             </form>
         </div>
     </div>

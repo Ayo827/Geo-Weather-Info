@@ -34,7 +34,7 @@ export default function Header(){
       }
   
     return <div className='Header'>
-            Weather Info
+            <span onClick={()=> window.location.replace("https://geo-weatherinfo.herokuapp.com/") }>Weather Info </span>
             {userID ?<div className='info'>
             <p>Welcome {userName}!</p>
             <button onClick={ handleLogout}>Log Out</button>

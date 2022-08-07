@@ -12,7 +12,7 @@ export default function Weather() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const mapElement = useRef();
-  const [mapZoom, setMapZoom] = useState(7);
+  const [mapZoom, setMapZoom] = useState(5);
   const [map, setMap] = useState({});
   const [tempc, setTempC] = useState(null);
   const [tempf, setTempF] = useState(null)
@@ -22,9 +22,10 @@ export default function Weather() {
   const [showHumdity, setShowHumdity] = useState(false);
   const [message, setMessage] = useState("");
   const [userName, setUserName] = useState("");
+  const [processing, setProcessing] = useState(false)
   const userID = window.localStorage.getItem("userID");
   const country = window.localStorage.getItem("country")
-
+  
   useEffect(() => {
     if (userID !== null) {
       instance({
@@ -42,7 +43,7 @@ export default function Weather() {
       axios({
         method: "get",
         headers: { "Content-Type": "application/json" },
-        url: `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_weatherAPIKEY}&q=${country}`
+        url: `https://api.weatherapi.com/v1/current.json?key=fd495b9a5f7b43cebc392220220508&q=${country}`
       }).then(res => {
         setTempC(res.data.current.temp_c);
         setTempF(res.data.current.temp_f);
@@ -51,7 +52,7 @@ export default function Weather() {
       instance({
         method: "get",
         headers: { "Content-Type": "application/json" },
-        url: `https://api.tomtom.com/search/2/geocode/${country}.json?key=${process.env.REACT_APP_tomtom__APIKey}&language=en-GB`
+        url: `https://api.tomtom.com/search/2/geocode/${country}.json?key=Jyt1Xa3XYp2ldGjk68wWj9S4EGbf29up&language=en-GB`
       }).then(res => {
         const geocode = []
         // for(let i = 0; i < res.data.results.length; i++){
@@ -69,7 +70,7 @@ export default function Weather() {
         // }
         geocode.forEach((element, index) => {
           let map = ttmaps.map({
-            key: `"${process.env.REACT_APP_tomtom__APIKey}"`,
+            key: "Jyt1Xa3XYp2ldGjk68wWj9S4EGbf29up",
             container: mapElement.current,
             center: [element.lon, element.lat],
             zoom: mapZoom
@@ -106,7 +107,7 @@ export default function Weather() {
                 "coordinates": [element.lon, element.lat]
               }
             },
-            url: `https://api.tomtom.com/geofencing/1/projects/${process.env.REACT_APP_tomtom__ProjectID}/fence?key=${process.env.REACT_APP_tomtom__APIKey}&adminKey=${process.env.REACT_APP_tomtom__AdminKey}`
+            url: 'https://api.tomtom.com/geofencing/1/projects/2d7e753f-1439-4380-b47e-4de4f7910632/fence?key=Jyt1Xa3XYp2ldGjk68wWj9S4EGbf29up&adminKey=SdITV1KchlXizvypGdknmgkLOUyDsgHaJrRGujSTeClolmvx'
           }).then(res => {
             map.addLayer({
               'id': Math.random().toString(),
@@ -137,18 +138,18 @@ export default function Weather() {
     } else {
       navigate("/login")
     }
-
   }, [])
 
   const searchCity = e => {
     e.preventDefault();
+    setProcessing(true);
     if ((search.length === 0) || (search === " ")) {
       setMessage("Please enter a location.")
     } else {
       axios({
         method: "get",
         headers: { "Content-Type": "application/json" },
-        url: `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_weatherAPIKEY}&q=${country}`
+        url: `https://api.weatherapi.com/v1/current.json?key=fd495b9a5f7b43cebc392220220508&q=${search}`
       }).then(res => {
         setTempC(res.data.current.temp_c);
         setTempF(res.data.current.temp_f);
@@ -157,7 +158,7 @@ export default function Weather() {
       instance({
         method: "get",
         headers: { "Content-Type": "application/json" },
-        url: `https://api.tomtom.com/search/2/geocode/${country}.json?key=${process.env.REACT_APP_tomtom__APIKey}&language=en-GB`
+        url: `https://api.tomtom.com/search/2/geocode/${search}.json?key=Jyt1Xa3XYp2ldGjk68wWj9S4EGbf29up&language=en-GB`
       }).then(res => {
         const geocode = []
         // for(let i = 0; i < res.data.results.length; i++){
@@ -175,7 +176,7 @@ export default function Weather() {
         // }
         geocode.forEach((element, index) => {
           let map = ttmaps.map({
-            key: `"${process.env.REACT_APP_tomtom__APIKey}"`,
+            key: "Jyt1Xa3XYp2ldGjk68wWj9S4EGbf29up",
             container: mapElement.current,
             center: [element.lon, element.lat],
             zoom: mapZoom
@@ -199,6 +200,7 @@ export default function Weather() {
           const rn = Math.floor((Math.random() * 100) + 1)
 
           const join = year + "" + day + "" + time + "" + rn;
+          setProcessing(false);
           axios({
             method: "post",
             headers: { "Content-Type": "application/json" },
@@ -212,7 +214,7 @@ export default function Weather() {
                 "coordinates": [element.lon, element.lat]
               }
             },
-            url: `https://api.tomtom.com/geofencing/1/projects/${process.env.REACT_APP_tomtom__ProjectID}/fence?key=${process.env.REACT_APP_tomtom__APIKey}&adminKey=${process.env.REACT_APP_tomtom__AdminKey}`
+            url: 'https://api.tomtom.com/geofencing/1/projects/2d7e753f-1439-4380-b47e-4de4f7910632/fence?key=Jyt1Xa3XYp2ldGjk68wWj9S4EGbf29up&adminKey=SdITV1KchlXizvypGdknmgkLOUyDsgHaJrRGujSTeClolmvx'
           }).then(res => {
             map.addLayer({
               'id': Math.random().toString(),
@@ -244,45 +246,38 @@ export default function Weather() {
 
   }
 
-  const draw = () => {
-    map.addLayer({
-      'id': Math.random().toString(),
-      'type': 'fill',
-      'source': {
-        'type': 'geojson',
-        'data': {
-          'type': 'Feature',
-          "geometry": {
-            "type": "Polygon",
-            "coordinates": [
-              [
-                [-123.123779, 48.227039],  // contig. u.s.
-              ]
-            ]
-          }
-        }
-      },
-      'layout': {},
-      'paint': {
-        'fill-color': '#ff0000',
-        'fill-opacity': 0.5
-      }
-    })
-    map.setCenter([parseFloat(-123.123779), parseFloat(48.227039)]);
-  };
+ const zoomIn = () => {
+  if (mapZoom < 20) {
+  setMapZoom(mapZoom + 1);
+ }
+}
+ const zoomOut = () => {
+  if (mapZoom > 1) {
+  setMapZoom(mapZoom - 1);
+  }
+ }
   return <div className='Home'>
     <Header />
     <div className='Home__Body'>
       <div className='Home__Search'>
         <form className="Home__FormSearch">
           <input type="text" placeholder="Enter Name of City" onChange={e => setSearch(e.target.value)} required />
-          <button onClick={searchCity}>Search</button>
+          <button className={(processing === true)? 'disabled': 'active'} onClick={searchCity}>{(processing === true) ? 'Searching ...' : 'Search'}</button>
         </form>
       </div>
       <p>{message}</p>
       <div className='Map'>
         <div className='conatiner'>
           <div className='row'>
+          <div className='col-12'>
+          <div className='zoomContainer'>
+          <div className='Zoom'>
+          <p onClick={zoomIn}>+</p>
+          <p onClick={zoomOut}>-</p>
+      </div>
+          </div>
+        
+          </div>
             {/* {map.map((m, index)=> {   */}
             <div className={(mapElement === undefined) ? 'noDisplay' : 'section'}>
               <div className='temp'>
@@ -328,6 +323,7 @@ export default function Weather() {
             </div>
             <div className="col-12 mapDiv" ref={mapElement}>
             </div>
+         
             {/*   })}  */}
           </div>
         </div>
