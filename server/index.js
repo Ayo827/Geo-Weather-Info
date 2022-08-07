@@ -10,10 +10,10 @@ const sqlite3 = require('sqlite3');
 //MIDDLEWARES
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors({origin: "http://localhost:3000"}));
+app.use(cors({origin: "*"}));
 require('dotenv').config();
 app.use((req, res, next)=> {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
