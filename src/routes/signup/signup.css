@@ -1,0 +1,76 @@
+.Signup{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+p{
+    margin: 0;
+}
+.Signup__container{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    padding: 2rem;
+    height: 480px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(93, 93, 223);
+}
+.Signup__para{
+    width: 100%;
+    text-align: left;
+}
+.Signup__Form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 450px;
+}
+.Signup__Form input{
+   height:40px;
+    border-radius: 10px;
+    border: 1px solid rgb(93, 93, 223);
+    padding-left: 30px;
+}
+.Signup__Form button{
+    height: 50px;
+    background-color: rgb(93, 93, 223);
+    border: 2px solid rgb(93, 93, 223);
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin: 0;
+}
+.Signup__Form p, .Signup__para{
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+.Signup__Form p a{
+    color: rgb(93, 93, 223);
+    padding-left: 2px;
+}
+a{
+    text-decoration: none;
+}
+@media screen and (max-width: 600px) {
+    .Signup__container{
+        width: fit-content;
+    }
+    .Signup__Form, .Signup__para{
+        width: 100%;
+    }
+    .Signup__Form input{
+        padding-left: 20px;
+        font-size: 14px;
+    }
+    .Signup__para, .Signup__Form p{
+        font-size: 14px;
+    }
+}

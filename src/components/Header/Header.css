@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.Header{
+    width: 100%;
+    display: flex;
+    height: 100px;
+    background-color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: rgb(93, 93, 223);
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgb(202, 201, 201);
+}
+.info{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50%;
+}
+.info p{
+    font-weight: 900;
+    font-size: 18px;
+    color: rgb(216, 66, 66);
+    letter-spacing: 1px;
+}
+.info button{
+    height: 35px;
+    width: 80px;
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    background-color: rgb(216, 66, 66);
+    border: 2px solid rgb(216, 66, 66);
+    margin: 0;
+}
+@media screen and (max-width: 600px) {
+    .Header{
+        font-size: 20px;
+    }
+    .info{
+        width: 60%;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+@media screen and (max-width: 500px) {
+    .info p{
+        font-size: 15px;
+        font-weight: 500;
+    }
+}
+@media screen and (max-width: 450px) {
+.Header{
+    padding: 0 1rem;
+    font-size: 18px;
+}
+.info p{
+    font-size: 13px;
+}
+}

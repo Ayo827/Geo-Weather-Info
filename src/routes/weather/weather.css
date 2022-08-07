@@ -1,0 +1,148 @@
+.Home{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.Home__Body, .Home__Search{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 530px;
+}
+.Home__Search{
+    height: 100px;
+    justify-content: center;
+}
+button{
+    cursor: pointer;
+}
+.Home__Body .info{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+}
+.Home__FormSearch{
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.Home__FormSearch input{
+    width: 70%;
+    height: 50px;
+    padding-left: 30px;
+    border-radius: 10px;
+}
+.Home__FormSearch input, .Home__FormSearch input:focus{
+    outline: 0;
+    border: 2px solid rgb(93, 93, 223);
+}
+
+.Home__FormSearch button{
+    width: 20%;
+    background-color: rgb(93, 93, 223);
+    border: 2px solid rgb(93, 93, 223);
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.Map{
+    width: 100%;
+}
+button {
+    margin: 2rem 0;
+  }
+  .mapDiv {
+    height: 20rem;
+  }
+  .noDisplay{
+    display: none;
+  }
+  .section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30%;
+    height: 200px;
+    position: absolute;
+    z-index: 100;
+    top: 270px;
+    left: 30px;
+  }
+  
+  .temp{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .temp > button{
+    margin: 0;
+    width: 50%;
+    height: 50px;
+    font-size: 14px;
+    border: 2px solid rgb(216, 66, 66);
+    background-color: rgb(216, 66, 66);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+  /* .temp > p{
+    width: 50%;
+    height: 50px;
+  } */
+  @media screen and (max-width: 760px) 
+{
+    .Home__FormSearch{
+        width: 65%;
+    }
+}
+  @media screen and (max-width: 600px) {
+    .Home__FormSearch input{
+        padding-left: 20px;
+    }
+    .Home__FormSearch{
+        width: 80%;
+    }
+    .section{
+        width: 35%;
+        left: 10px;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .Home__FormSearch button{
+        font-size: 14px;
+    }
+    .section{
+        width: 100%;
+        flex-direction: row;
+        position: unset;
+        height: 70px;
+    }
+    .temp{
+        flex-direction: column;
+        height: 130px;
+    }
+    .temp button{
+        width: 80%;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .info{
+        flex-direction: column;
+        justify-content: center;
+        height: 100px;
+    }
+    .info button{
+        width: 100px;        ;
+    }
+  }
